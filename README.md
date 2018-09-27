@@ -1,2 +1,2 @@
 # CUDA-DSP-Library
-This project is to implement CUDA DSP library.
+This project is to implement a CUDA DSP library.
