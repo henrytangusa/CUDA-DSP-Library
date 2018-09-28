@@ -1,5 +1,5 @@
-#ifndef SIGNALS_H
-#define SIGNALS_H
+#ifndef CUDA_SIGNALS_H
+#define CUDA_SIGNALS_H
 
 class Signals{
 	public:

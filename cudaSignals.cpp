@@ -1,4 +1,4 @@
-#include"Signals.h"
+#include"cudaSignals.h"
 
 Signals::Signals(void)
 {

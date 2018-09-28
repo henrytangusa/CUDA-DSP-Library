@@ -1,5 +1,5 @@
 #include<iostream>
-#include"SaSL.h"
+#include"cudaSaSL.h"
 
 SaSL::SaSL(void)
 {

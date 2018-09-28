@@ -1,5 +1,5 @@
-#ifndef SYSTEMS_H
-#define SYSTEMS_H
+#ifndef CUDA_SYSTEMS_H
+#define CUDA_SYSTEMS_H
 
 class Signals;
 

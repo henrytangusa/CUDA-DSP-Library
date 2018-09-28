@@ -1,5 +1,5 @@
-#ifndef SASL_H
-#define SASL_H
+#ifndef CUDA_SASL_H
+#define CUDA_SASL_H
 
 
 #include<memory>

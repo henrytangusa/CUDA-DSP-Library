@@ -1,4 +1,4 @@
-#include"SaSL.h"
+#include"cudaSaSL.h"
 
 
 int main(void)

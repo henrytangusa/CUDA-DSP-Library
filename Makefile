@@ -4,7 +4,7 @@ CPP=g++
 CFLAGS= -std=c++11 -I. -Wall
 LDFLAGS=
 
-SRCS = SaSL.cpp Client.cpp Signals.cpp Systems.cpp
+SRCS = cudaSaSL.cpp Client.cpp cudaSignals.cpp cudaSystems.cpp
 #OBJS = $(filter %.o,$(SRCS:.cpp=.o))
 OBJS = $(SRCS:.cpp=.o)
 
