@@ -13,19 +13,22 @@ class Systems;
 
 class SaSL
 {
-private:
-	vector<shared_ptr<Signals>> m_Signalset;
-	vector<shared_ptr<Systems>> m_Systemset;
+    public:
+        enum SignalType {
+            NOSIG = 0,
+            NOISE = 1,
+            SIN   = 2
+        };
 
-        Signals createSignal(void);
-        Systems createSystem(void);
+        enum SystemType {
+            FIR = 0,
+            IIR = 1
+        };
 
-	SaSL(void);
-	~SaSL(void);
-public:
+
         static SaSL &Instance(void) {
-	    static SaSL m_Instance;
-	    return m_Instance;
+            static SaSL m_Instance;
+            return m_Instance;
         }
 
         // delete copy and move constructors and assign operators
@@ -33,6 +36,18 @@ public:
         SaSL(SaSL&&) = delete;                  // Move construct
         SaSL& operator=(SaSL const&) = delete;  // Copy assign
         SaSL& operator=(SaSL &&) = delete;      // Move assign  
+
+    private:
+
+//        vector<shared_ptr<Signals>> m_Signalset;
+//        vector<shared_ptr<Systems>> m_Systemset;
+
+        shared_ptr<Signals> initiateSignal(SignalType sgt);
+        shared_ptr<Systems> initiateSystem(SystemType syt);
+
+        SaSL(void);
+        ~SaSL(void);
+
 };
 
 #endif

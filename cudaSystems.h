@@ -1,19 +1,28 @@
 #ifndef CUDA_SYSTEMS_H
 #define CUDA_SYSTEMS_H
 
-class Signals;
+#include"cudaSignals.h"
 
 class Systems{
 	public:
-		Systems(void);
-		virtual ~Systems(void); 
+		Systems(void){};
+        virtual bool activate(Signals &sig) = 0;
+		virtual ~Systems(void){}; 
 };
 
 
-class FIR: public Systems{
+class FIRFilter: public Systems{
        public:
-              FIR(void);
-              virtual ~FIR(void);	      
+              FIRFilter(void){};
+              bool activate(Signals &sig) { return true; }
+              virtual ~FIRFilter(void){};	      
+};
+
+class IIRFilter: public Systems{
+       public:
+              IIRFilter(void){}
+              bool activate(Signals &sig) { return true; }
+              virtual ~IIRFilter(void){};
 };
 
 
