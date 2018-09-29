@@ -3,7 +3,8 @@
 
 int main(void)
 {
-      SaSL &pS = SaSL::Instance();
+      SaSL &Rs = SaSL::Instance();
+      Rs.initiateSignal(SaSL::SIN);
 
       return 0;
 }

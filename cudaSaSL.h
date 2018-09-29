@@ -16,15 +16,14 @@ class SaSL
     public:
         enum SignalType {
             NOSIG = 0,
-            NOISE = 1,
-            SIN   = 2
+            SIN   = 1,
+            COS   = 2
         };
 
         enum SystemType {
             FIR = 0,
             IIR = 1
         };
-
 
         static SaSL &Instance(void) {
             static SaSL m_Instance;
@@ -37,11 +36,11 @@ class SaSL
         SaSL& operator=(SaSL const&) = delete;  // Copy assign
         SaSL& operator=(SaSL &&) = delete;      // Move assign  
 
-    private:
 
         shared_ptr<Signals> initiateSignal(SignalType sgt);
         shared_ptr<Systems> initiateSystem(SystemType syt);
 
+    private:
         SaSL(void);
         ~SaSL(void);
 

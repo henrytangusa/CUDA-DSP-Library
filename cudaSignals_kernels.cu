@@ -1,4 +1,3 @@
-
 #include "cuda.h"
 
 __global__ void SinWaveKernel(float *data, int size, 
@@ -18,7 +17,6 @@ void cudaSinWave(float *data, int size,
                    float amp, float freq, float ip, float sr, float tt)
 {
       SinWaveKernel<<<1024, BLOCK>>>(data, size, amp, freq, ip, sr, tt);
-
 };
 	
 void cudaCosWave(float *data, int size, 
