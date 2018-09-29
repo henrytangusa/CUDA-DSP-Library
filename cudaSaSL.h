@@ -39,9 +39,6 @@ class SaSL
 
     private:
 
-//        vector<shared_ptr<Signals>> m_Signalset;
-//        vector<shared_ptr<Systems>> m_Systemset;
-
         shared_ptr<Signals> initiateSignal(SignalType sgt);
         shared_ptr<Systems> initiateSystem(SystemType syt);
 
