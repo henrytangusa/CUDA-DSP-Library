@@ -1,6 +1,6 @@
 #include "cuda.h"
 #include "math_constants.h"
-#include"cuda_runtime.h"
+#include "cuda_runtime.h"
 
 
 __global__ void runSinWaveKernel(float *data, int size, 

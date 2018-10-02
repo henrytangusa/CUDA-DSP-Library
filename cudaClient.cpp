@@ -5,9 +5,10 @@
 int main(void)
 {
       SaSL &Rs = SaSL::Instance();
-      Signals *sp  = Rs.initiateSignal(SaSL::COS);
-      
+      Signals *sp  = Rs.initiateSignal(SignalType::SIN);
+      sp->Configure(100, 1, 0, 100);      
       sp->Generator();
+      sp->Output();
 
       delete sp;
 

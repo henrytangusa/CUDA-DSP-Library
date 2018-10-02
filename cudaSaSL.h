@@ -1,6 +1,7 @@
 #ifndef CUDA_SASL_H
 #define CUDA_SASL_H
 
+#include "cudaSignals.h"
 
 #include<memory>
 #include<vector>
@@ -8,17 +9,11 @@
 
 using namespace std;
 
-class Signals;
 class Systems;
 
 class SaSL
 {
     public:
-        enum SignalType {
-            NOSIG = 0,
-            SIN   = 1,
-            COS   = 2
-        };
 
         enum SystemType {
             FIR = 0,
