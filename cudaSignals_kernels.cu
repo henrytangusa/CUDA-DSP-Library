@@ -2,6 +2,7 @@
 #include "math_constants.h"
 #include"cuda_runtime.h"
 
+#define pi 31415926
 
 __global__ void runSinWaveKernel(float *data, int size, 
                 float amp, float freq, float ip, int sr)  // tt time interval is not needed
