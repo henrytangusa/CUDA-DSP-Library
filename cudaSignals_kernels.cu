@@ -1,32 +1,43 @@
 #include "cuda.h"
 #include"cuda_runtime.h"
 
+#define pi 31415926
 
-__global__ void SinWaveKernel(float *data, int size, 
-                float amp, float freq, float ip, int sr, float tt)
+
+__global__ void runSinWaveKernel(float *data, int size, 
+                float amp, float freq, float ip, int sr)  // tt time interval is not needed
+
 {
-
+     unsigned int x = blockIdx.x*blockDim.x + threadIdx.x;
+     if (x >= size)  return;
+     float sampleInterval = sr / freq;   // Sample rate/signal freq
+     data[x] = amp * sinf((2.0 * pi * (float)x) / sampleInterval + ip);
 }
                               
 
-__global__ void CosWaveKernel(float *data, int size, 
-                float amp, float freq, float ip, int sr, float tt)
+__global__ void runCosWaveKernel(float *data, int size, 
+                float amp, float freq, float ip, int sr)
 {
-
+     unsigned int x = blockIdx.x*blockDim.x + threadIdx.x;
+     if (x >= size)  return;
+     float sampleInterval = sr / freq;   // Sample rate/signal freq
+     data[x] = amp * sinf((2.0 * pi * (float)x) / sampleInterval + ip);
 }
                               
-void SinWaveKernel(float *data, int size, 
-                   float amp, float freq, float ip, int sr, float tt)
+bool SinWaveKernel(float *data, int size, 
+                   float amp, float freq, float ip, int sr)
 {
-        SinWaveKernel<<1024, BLOCK >> (data, size, amp, freq, ip, sr, tt);
-        check_error(cudaPeekAtLastError());
+        runSinWaveKernel<<<1024, BLOCK >>> (data, size, amp, freq, ip, sr);
+        cudaDeviceSynchronize();
+        return cudaPeekAtLastError() == cudaSuccess;
 }
 
 
-void CosWaveKernel(float *data, int size, 
+bool CosWaveKernel(float *data, int size, 
                    float amp, float freq, float ip, int sr, float tt)
 {
-        SinWaveKernel<<1024, BLOCK >> (data, size, amp, freq, ip, sr, tt);
-        check_error(cudaPeekAtLastError());
+        runCosWaveKernel<<<1024, BLOCK >>> (data, size, amp, freq, ip, sr);
+        cudaDeviceSynchronize();
+        return cudaPeekAtLastError() == cudaSuccess;
 }
 

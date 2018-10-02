@@ -1,4 +1,4 @@
-GPU=0
+GPU=1
 DEBUG=0
 
 ARCH= -gencode arch=compute_30,code=sm_30 \
@@ -35,7 +35,7 @@ endif
 OBJ= cudaSaSL.o cudaSignals.o cudaSystems.o cudaClient.o
 
 ifeq ($(GPU), 1) 
-LDFLAGS+= -lstdc++ 
+LDFLAGS+= -lstdc++ -lcudart
 OBJ+= cudaSignals_kernels.o
 endif
 
@@ -45,7 +45,7 @@ DEPS = $(wildcard *.h) Makefile
 all: $(EXEC)
 
 $(EXEC): $(OBJ)
-	$(CPP) $(COMMON) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+	$(CC) $(COMMON) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
 %.o: %.cpp $(DEPS)
 	$(CPP) -std=c++11 $(COMMON) $(CFLAGS) -c $< -o $@
