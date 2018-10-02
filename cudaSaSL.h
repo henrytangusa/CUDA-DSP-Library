@@ -37,8 +37,8 @@ class SaSL
         SaSL& operator=(SaSL &&) = delete;      // Move assign  
 
 
-        shared_ptr<Signals> initiateSignal(SignalType sgt);
-        shared_ptr<Systems> initiateSystem(SystemType syt);
+        Signals * initiateSignal(SignalType sgt);
+        Systems * initiateSystem(SystemType syt);
 
     private:
         SaSL(void);

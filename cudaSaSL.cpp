@@ -8,35 +8,25 @@ SaSL::SaSL(void)
      cout <<"SaSL Instance created" << endl;	
 };
 
-shared_ptr<Signals> SaSL::initiateSignal(SignalType sgt)
+Signals *SaSL::initiateSignal(SignalType sgt)
 {
      switch (sgt) {
          case SIN:
-         {
-            shared_ptr<SinWave> ssp (new SinWave);
-            return ssp;
-         }
-         break;
+            return new SinWave;
+         case COS: 
+            return new CosWave;
          default:
             return nullptr;  
     } 
 };
 
-shared_ptr<Systems> SaSL::initiateSystem(SystemType syt)
+Systems * SaSL::initiateSystem(SystemType syt)
 {
        switch(syt) {
             case FIR:
-            {
-                shared_ptr<FIRFilter> fir( new FIRFilter);
-                return fir;
-            }
-            break;
+                return new FIRFilter;
             case IIR:
-            {
-                shared_ptr<IIRFilter> iir( new IIRFilter);
-                return iir;
-            }
-            break;
+                return new IIRFilter;
             default:
                return nullptr;
        } 
