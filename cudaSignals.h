@@ -1,57 +1,56 @@
 #ifndef CUDA_SIGNALS_H
 #define CUDA_SIGNALS_H
 
+
+enum class SignalType {
+     NSG = 0,
+     SIN = 1,
+     COS   = 2
+};
+
 class Signals{
 	public:
-		float m_sr, m_tt; 
+		float m_sr;  // sample rate 
 		Signals(void);    
-		Signals(float SamplingRate, float Timeinterval):m_sr{SamplingRate}, m_tt{Timeinterval}{};
-                Signals(Signals const &s):m_sr(s.m_sr), m_tt(s.m_tt) {
+		Signals(float SamplingRate):m_sr{SamplingRate}{};
+                Signals(Signals const &s):m_sr(s.m_sr){
                 }
-                Signals(Signals &&s):m_sr(s.m_sr), m_tt(s.m_tt) {
+                Signals(Signals &&s):m_sr(s.m_sr){
                 }
                 
                 Signals &operator= (Signals const &s)
                 {
                      m_sr = s.m_sr;
-                     m_tt = s.m_tt;
                      return *this;
                 }
 
                 Signals &operator= (Signals &&s)
                 {
                      m_sr = s.m_sr;
-                     m_tt = s.m_tt;
                      return *this;
                 }
 		virtual bool Generator(void) = 0;
+                virtual void Configure(float Amp, float Frequency, float InitPhase, float SamplingRate) = 0;
+                virtual void Output(void) const = 0;
 		virtual ~Signals(void);  
 };
 
 
-class SinWave: public Signals {
-	private:
-		float m_amp, m_freq, m_ip;
-	public:
-		SinWave(void){};
-		SinWave(float Amp, float Frequency, float InitPhase,
-				float SamplingRate, float Timeinterval):Signals(SamplingRate, Timeinterval),
-		m_amp{Amp}, m_freq{Frequency}, m_ip{InitPhase} {};
-		virtual bool Generator(void);
-		virtual ~SinWave(void){};
-};
+class SinCosWave: public Signals {
+        public:
+                bool configured {false};
 
-class CosWave: public Signals {
-	private:
-		float m_amp, m_freq, m_ip;
-	public:
-		CosWave(void){};
-		CosWave(float Amp, float Frequency, float InitPhase,
-				float SamplingRate, float Timeinterval):Signals(SamplingRate, Timeinterval),
+                SignalType m_type;
+                float *m_pdata {nullptr};
+		float m_amp, m_freq, m_ip; 
+		SinCosWave(SignalType vf):m_type{vf} {};
+		SinCosWave(float Amp, float Frequency, float InitPhase,
+				float SamplingRate):Signals(SamplingRate),
 		m_amp{Amp}, m_freq{Frequency}, m_ip{InitPhase} {};
-
+                virtual void Configure(float Amp, float Frequency, float InitPhase, float SamplingRate);
 		virtual bool Generator(void);
-		virtual ~CosWave(void){};
+                virtual void Output(void) const;
+		virtual ~SinCosWave(void);
 };
 
 

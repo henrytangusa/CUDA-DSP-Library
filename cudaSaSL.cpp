@@ -10,14 +10,7 @@ SaSL::SaSL(void)
 
 Signals *SaSL::initiateSignal(SignalType sgt)
 {
-     switch (sgt) {
-         case SIN:
-            return new SinWave;
-         case COS: 
-            return new CosWave;
-         default:
-            return nullptr;  
-    } 
+            return new SinCosWave(sgt);
 };
 
 Systems * SaSL::initiateSystem(SystemType syt)
