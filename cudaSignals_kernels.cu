@@ -23,19 +23,19 @@ __global__ void runCosWaveKernel(float *data, int size,
      data[x] = amp * cosf((2.0 * CUDART_PI_F * (float)x) / sampleInterval + ip);
 }
                               
-extern "C" bool SinWaveKernel(float *data, int size, 
+bool SinWaveKernel(float *data, int size, 
                    float amp, float freq, float ip, int sr)
 {
-        runSinWaveKernel<<<1024, BLOCK >>> (data, size, amp, freq, ip, sr);
+        runSinWaveKernel<<<1024, 1024 >>> (data, size, amp, freq, ip, sr);
         cudaDeviceSynchronize();
         return cudaPeekAtLastError() == cudaSuccess;
 }
 
 
-extern "C" bool CosWaveKernel(float *data, int size, 
+bool CosWaveKernel(float *data, int size, 
                    float amp, float freq, float ip, int sr)
 {
-        runCosWaveKernel<<<1024, BLOCK >>> (data, size, amp, freq, ip, sr);
+        runCosWaveKernel<<<1024, 1024>>> (data, size, amp, freq, ip, sr);
         cudaDeviceSynchronize();
         return cudaPeekAtLastError() == cudaSuccess;
 }
